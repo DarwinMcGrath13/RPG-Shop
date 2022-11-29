@@ -2,10 +2,33 @@
 //
 
 #include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std; 
+
+class Player
+{
+public:
+	int money;
+};
+
+class Item
+{
+public:
+	string name;
+	int price;
+
+	Item(string itemname, int itemprice)
+};
 
 int main()
 {
-    std::cout << "Hello World!\n";
+
+	Player player;
+
+	player.money = 100;
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
