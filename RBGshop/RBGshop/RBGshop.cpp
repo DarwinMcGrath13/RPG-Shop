@@ -19,8 +19,29 @@ public:
 	string name;
 	int price;
 
-	Item(string itemname, int itemprice)
+	Item(string itemname, int itemprice);
 };
+
+Item::Item(string itemname, int itemprice)
+{
+	name = itemname;
+	price = itemprice;
+}
+
+class ItemSlot
+{
+public:
+	Item item;
+	int quantity;
+
+	ItemSlot(Item i, int qty);
+};
+
+ItemSlot::ItemSlot(Item i, int qty)
+{
+	item = i;
+	quantity = qty;
+}
 
 int main()
 {
@@ -29,6 +50,10 @@ int main()
 
 	player.money = 100;
 
+	Item sword("Aurther", 50);
+	Item shield("Link", 25);
+	Item armor("Sir Aurther's armor", 75);
+	Item potion("Health", 15);
 }
 
 //HELLO LOOK AT ME!!!!
