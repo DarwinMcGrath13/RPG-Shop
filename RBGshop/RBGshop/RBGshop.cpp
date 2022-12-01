@@ -19,7 +19,7 @@ public:
 	string name;
 	int price;
 
-	Item(string itemname, int itemprice);
+	Item(string itemname = "mt", int itemprice = 0);
 };
 
 Item::Item(string itemname, int itemprice)
@@ -34,7 +34,7 @@ public:
 	Item item;
 	int quantity;
 
-	ItemSlot(Item i, int qty);
+	ItemSlot(Item i, int qty = 1);
 };
 
 ItemSlot::ItemSlot(Item i, int qty)
@@ -43,8 +43,14 @@ ItemSlot::ItemSlot(Item i, int qty)
 	quantity = qty;
 }
 
+void displayInventory(vector<ItemSlot>* inventory);
+
+int askNumber(string question, int high, int low);
+
 int main()
 {
+
+	vector<ItemSlot> merchantInventory;
 
 	Player player;
 
@@ -54,6 +60,49 @@ int main()
 	Item shield("Link", 25);
 	Item armor("Sir Aurther's armor", 75);
 	Item potion("Health", 15);
+
+	ItemSlot slot1(sword); 
+	ItemSlot slot2(shield);
+	ItemSlot slot3(armor);
+	ItemSlot slot4(potion, 4);
+
+	merchantInventory.push_back(slot1);
+	merchantInventory.push_back(slot2);
+	merchantInventory.push_back(slot3);
+	merchantInventory.push_back(slot4);
+
+	displayInventory(&merchantInventory);
+}
+
+void displayInventory(vector<ItemSlot>* inventory)
+{
+	if (inventory->size() == 0)
+	{
+		cout << "\nnothing.\n";
+	}
+
+	for (int i = 0; i < inventory->size(); i++)
+	{
+		cout << "\n(" << i + 1 << ")" << endl;
+		cout << "Item: " << (*inventory)[i].item.name << endl;
+		cout << "Price: " << (*inventory)[i].item.price << endl;
+		cout << "Quantity: " << (*inventory)[i].quantity << endl;
+	}
+}
+
+int askNumber(string question, int high, int low)
+{
+	int number;
+	do
+	{
+		cout << question << "\n(" << low << "-" << high << "): ";
+		cin >> number;
+		if (number > high || number < low)
+		{
+			cout << "Pick a valid option.\n";
+		}
+	} while (number > high || number < low);
+	return number;
 }
 
 //HELLO LOOK AT ME!!!!
