@@ -51,7 +51,7 @@ int main()
 {
 
 	vector<ItemSlot> merchantInventory;
-
+	vector<ItemSlot> playerInventory;
 	Player player;
 
 	player.money = 100;
@@ -71,7 +71,50 @@ int main()
 	merchantInventory.push_back(slot3);
 	merchantInventory.push_back(slot4);
 
-	displayInventory(&merchantInventory);
+	int choose;
+	int buyChoose;
+	int sellChoose;
+	int yesNo;
+
+	do {
+		cout << "Hello welcome to my Shop" << endl;
+		cout << "1. buy" << endl;
+		cout << "2.sell" << endl;
+		cout << "3.Quit" << endl;
+		choose = askNumber("What would you like to Do?", 3, 1); 
+
+		switch (choose) {
+		case 1:
+			cout << "\n*You have " << player.money << " gold coins*";
+
+			displayInventory(&merchantInventory);
+
+			cout << "\n(5) leave\n";
+
+			buyChoose = askNumber("", static_cast<int>(merchantInventory.size()), 1);
+
+			if (buyChoose == 5)
+			{
+				cout << "\nleaving...\n";
+				break;
+			}
+			cout << "\nWould you like to buy " << merchantInventory[buyChoose - 1].item.name << " for " << merchantInventory[buyChoose - 1].item.price << " gold coins? There are " << merchantInventory[buyChoose - 1].quantity << " " << merchantInventory[buyChoose - 1].item.name << "'s in stock.\n";
+			cout << "\n(1) Yes\n";
+			cout << "\n(2) No\n";
+
+			yesNo = askNumber("", 2, 1);
+			//ghyujdgfyujy5rjkcghkjxtygdckthuofuhga.;lkdrujghlioadeuhgolis&DGYVpiSYGUHVoisdyfvsdIOYvbbSOUIVYgbzdsouigbzsdouibgsodZUIGzsdoIUYosduiZ
+
+		case 2:
+
+			break;
+
+		case 3:
+
+			break;
+		}
+		
+	} while (choose != 3);
 }
 
 void displayInventory(vector<ItemSlot>* inventory)
