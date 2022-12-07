@@ -77,7 +77,7 @@ int main()
 	int yesNo;
 
 	do {
-		cout << "Hello welcome to my Shop" << endl;
+		cout << "\nHello welcome to my Shop" << endl;
 		cout << "1. buy" << endl;
 		cout << "2.sell" << endl;
 		cout << "3.Quit" << endl;
@@ -91,7 +91,7 @@ int main()
 
 			cout << "\n(5) leave\n";
 
-			buyChoose = askNumber("", static_cast<int>(merchantInventory.size()), 1);
+			buyChoose = askNumber("", static_cast<int>(merchantInventory.size())+1, 1);
 
 			if (buyChoose == 5)
 			{
@@ -103,10 +103,55 @@ int main()
 			cout << "\n(2) No\n";
 
 			yesNo = askNumber("", 2, 1);
-			//ghyujdgfyujy5rjkcghkjxtygdckthuofuhga.;lkdrujghlioadeuhgolis&DGYVpiSYGUHVoisdyfvsdIOYvbbSOUIVYgbzdsouigbzsdouibgsodZUIGzsdoIUYosduiZ
-
+			if (yesNo == 1) {
+				if (player.money < merchantInventory[buyChoose - 1].item.price) {
+					cout << "\nCome back with more money to be able to buy this item";
+					break; 
+				}
+				if (merchantInventory[buyChoose - 1].quantity < 1) {
+					cout << "\nI'm sold out of that item";
+					break; 
+				}
+				player.money -= merchantInventory[buyChoose - 1].item.price;
+				ItemSlot slot(merchantInventory[buyChoose - 1].item, 1);
+				playerInventory.push_back(slot);
+			}
+			else {
+				break;
+			}
+			break; 
 		case 2:
+			cout << "\n*You have " << player.money << " gold coins*";
 
+			displayInventory(&playerInventory);
+
+			cout << "\n(5) leave\n";
+
+			sellChoose = askNumber("", static_cast<int>(playerInventory.size()) + 1, 1);
+
+			if (sellChoose == 5)
+			{
+				cout << "\nleaving...\n";
+				break;
+			}
+			cout << "\nWould you like to sell" << playerInventory[sellChoose - 1].item.name << " for " << playerInventory[buyChoose - 1].item.price << " gold coins? There are " << playerInventory[buyChoose - 1].quantity << " " << playerInventory[sellChoose - 1].item.name << "'s in stock.\n";
+			cout << "\n(1) Yes\n";
+			cout << "\n(2) No\n";
+
+			yesNo = askNumber("", 2, 1);
+			if (yesNo == 1) {
+				
+				player.money += playerInventory[sellChoose - 1].item.price;
+				ItemSlot slot(playerInventory[sellChoose - 1].item, 1);
+				merchantInventory.push_back(slot);
+				vector<ItemSlot>::iterator iter;
+				iter = playerInventory.begin() + sellChoose - 1;
+				playerInventory.erase(iter);
+			}
+			else {
+				break;
+			}
+			break;
 			break;
 
 		case 3:
